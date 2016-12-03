@@ -22,15 +22,26 @@ const Card = (props) => {
   );
 };
 
+// Sample Data
+let data = [
+  {
+    name: "Austin Lauritsen",
+    avatar_url: "https://avatars2.githubusercontent.com/u/958206?v=4",
+    company: "Very Austin"
+  },
+  {
+    name: "Paul O’Shannessy",
+    avatar_url: "https://avatars1.githubusercontent.com/u/8445?v=4",
+    company: "Facebook"
+  }
+];
+
 const CardList = (props) => {
   return (
     <div>
-      <Card name="Austin Lauritsen"
-        avatar_url="https://avatars2.githubusercontent.com/u/958206?v=4"
-        company="Very Austin"
-      />
+      {props.cards.map(card => <Card {...card} />)}
     </div>
   );
 };
 
-render(<CardList />, document.getElementById('root'));
+render(<CardList cards={data} />, document.getElementById('root'));
