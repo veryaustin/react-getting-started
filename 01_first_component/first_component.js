@@ -26,26 +26,41 @@ import { Component } from 'react';
 
 //--- Number Advance Using Class Component ---//
 class Button extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { counter: 0 };
-  };
-
-  handleClick = () => {
-    this.setState((prevState) => {
-      return {
-        counter: prevState.counter + 1
-      }
-    });
-  }
-
   render() {
     return (
-      <button onClick={this.handleClick}>
-        {this.state.counter}
+      <button onClick={this.props.onClickFunction}>
+        +1
       </button>
     );
   }
 };
 
-render(<Button label="This is a test label" />, document.getElementById('root'));
+// Functional Component
+const Result = (props) => {
+  return (
+    <div>{props.counter}</div>
+  );
+};
+
+// App component to include all other components for rendering in the DOM using render
+class App extends Component {
+
+  state = { counter: 0 };
+
+  incrementCounter = () => {
+    this.setState((prevState) => ({
+      counter: prevState.counter + 1
+    }));
+  };
+
+  render() {
+    return (
+      <div>
+        <Button onClickFunction={this.incrementCounter} />
+        <Result counter={this.state.counter} />
+      </div>
+    );
+  }
+}
+
+render(<App />, document.getElementById('root'));
